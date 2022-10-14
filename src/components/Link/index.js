@@ -11,7 +11,6 @@ function isModifiedEvent (event) {
 }
 
 function handleClick (props, event) {
-    console.log('link_click',{props,event})
     if (props.onClick) {
         props.onClick(event);
     }
@@ -28,7 +27,7 @@ function handleClick (props, event) {
         return;
     }
 
-    event.preventDefault();
+    event.preventDefault(); //阻止默认行为
     history.push(props.to);
 }
 

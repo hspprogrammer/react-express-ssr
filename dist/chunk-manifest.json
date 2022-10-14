@@ -1,12 +1,15 @@
 {
   "client": [
-    "/assets/client.bundle.js"
+    "/assets/client.bundle.js",
+    "/assets/client.267436ed6bc93f1df360.hot-update.js"
   ],
   "homePage": [
-    "/assets/homePage.chunk.js"
+    "/assets/homePage.chunk.js",
+    "/assets/homePage.267436ed6bc93f1df360.hot-update.js"
   ],
   "newsPage": [
-    "/assets/newsPage.chunk.js"
+    "/assets/newsPage.chunk.js",
+    "/assets/newsPage.267436ed6bc93f1df360.hot-update.js"
   ],
   "notFoundPage": [
     "/assets/notFoundPage.chunk.js"

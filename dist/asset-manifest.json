@@ -1,7 +1,6 @@
 {
   "../index.html": "/index.html",
   "client.js": "/assets/client.bundle.js",
-  "favicon.ico": "/assets/favicon.ico",
   "homePage.js": "/assets/homePage.chunk.js",
   "newsPage.js": "/assets/newsPage.chunk.js",
   "notFoundPage.js": "/assets/notFoundPage.chunk.js"
