@@ -2,7 +2,7 @@ const { merge } = require('webpack-merge');
 const path = require('path')
 const baseWebpackConfig = require( "./webpack.config");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+import webpack from 'webpack';
 const DIST_DTR = path.resolve(__dirname,'./dist');
 
 const ServerWebpackConfig = merge(baseWebpackConfig,{
@@ -22,6 +22,9 @@ const ServerWebpackConfig = merge(baseWebpackConfig,{
     },
     target: "node",
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.BROWSER': false,
+        }),
     ],
     externals: [
         './chunk-manifest.json',

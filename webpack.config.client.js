@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const isDebug = !process.argv.includes("--release");
 const DIST_DTR = path.resolve(__dirname,'./dist');
+import webpack from 'webpack';
 
 const ClientWebpackConfig = merge(baseWebpackConfig,{
     entry: {
@@ -24,6 +25,9 @@ const ClientWebpackConfig = merge(baseWebpackConfig,{
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.BROWSER': true,
+        }),
         new HtmlWebpackPlugin({
             template:path.resolve(__dirname,'./public/index.html'),
             filename: "../index.html",

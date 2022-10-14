@@ -4,20 +4,20 @@ import App from "./app";
 import router from "./routes/routeRender";
 import deepForceUpdate from 'react-deep-force-update';
 
-import { createBrowserHistory } from "history";
+import history from './history';
 
-let history = createBrowserHistory();
 
 const context = {};
-let currentLocation = history.location;
+let currentLocation = history;
 let appInstance;
  
-async function onLocationChange(location, action){
+async function onLocationChange({location, action}){
 
   const isInitialRender = action;
 
   context.pathname = location.pathname;
 
+  console.log("客户端渲染",context,location)
   const route = await router.resolve(context);
   const insertCss = (...styles) => {
     const removeCss = styles.map(style => style._insertCss())
@@ -27,7 +27,7 @@ async function onLocationChange(location, action){
     {route.component}
   </App>);
   const container = document.getElementById('app');
-  const appInstance = isInitialRender ? hydrateRoot(element,container) : createRoot(container).render(element);
+  appInstance = isInitialRender ? hydrateRoot(container,element) : createRoot(container).render(element);
 
 }
 

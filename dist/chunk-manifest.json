@@ -1,7 +1,6 @@
 {
   "client": [
-    "/assets/client.bundle.js",
-    "/assets/client.c91fdc8ffe438ab28cc6.hot-update.js"
+    "/assets/client.bundle.js"
   ],
   "homePage": [
     "/assets/homePage.chunk.js"

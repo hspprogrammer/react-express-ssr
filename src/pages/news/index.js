@@ -3,7 +3,6 @@ import News from './news';
 
 async function action ({cookie , fetch}) {
     console.log("新闻页面")
-    const navigate = useNavigate();
     return {
         title: '京日找房',
         chunks: ['newsPage'],

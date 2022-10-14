@@ -1,22 +1,26 @@
 import React,{useState,useEffect} from "react";
 import s from "./home.less";
 import useStyles from 'isomorphic-style-loader/useStyles';
-import { useNavigate } from "react-router-dom";
+import Link from '../../components/Link';
 
 export default function Home(){
     useStyles(s)
-    // const navigate = useNavigate();
     const [dateStr,setDateStr] = useState('');
 
     console.log('sss')
     useEffect(()=>{
         setDateStr("hsp");
-        console.log('sss')
     },[])
+    const go = (path)=>{
+        // navigate("/news")
+        window.open('_self').location = '/news';
+        console.log('navigate("/news"')
+    }
     return (
         <div>
-            <div>首页d5</div>
-            <div onClick={() => navigate("/news")}>新闻</div>
+            <div>首页</div>
+            <div onClick={() => go('/news')}>新闻onclick</div>
+            <Link  to="/news">新闻</Link>
             <div>{dateStr}</div>
             <img className="nick_name_img" src="../../../public/images/01.png"  />
         </div>

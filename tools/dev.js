@@ -26,12 +26,12 @@ async function dev() {
   const clientConfig = require("../webpack.config.client");
   const serverConfig = require("../webpack.config.server");
 
-  // clientConfig.entry.client.unshift(hotMiddlewareScript)
+  clientConfig.entry.client = [ clientConfig.entry.client[0],hotMiddlewareScript, clientConfig.entry.client[1]]
 
   clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
   const clientCompiler = webpack(clientConfig);
 
-  serverConfig.entry.server.unshift(hotMiddlewareScript)
+  // serverConfig.entry.server.unshift(hotMiddlewareScript)
   serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   serverConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
   serverConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -54,7 +54,7 @@ async function dev() {
 
   const server = express();
   server.use((req,res,next)=>{
-    console.log("拦截器url",req.url)
+    // console.log("拦截器url",req.url)
     next()
   });
   console.log('static_path',path.resolve(__dirname,'../'))

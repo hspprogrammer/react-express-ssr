@@ -4,7 +4,7 @@ import App from "./app";
 import router from "./routes/routeRender";
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import path from "path";
-import {renderToString,renderToStaticMarkup} from "react-dom/server";
+import {renderToString,renderToStaticMarkup,renderToPipeableStream} from "react-dom/server";
 import Html from "./components/html";
 import { NotFoundPage } from './pages/404/404';
 
@@ -19,7 +19,6 @@ const server = express();
 // );
 
 // 静态资源映射到dist路径下
-// server.use("/dist", express.static(path.join(__dirname, "../dist")));
 
 server.use("/public", express.static(path.join(__dirname, "../public")));
 
@@ -36,6 +35,7 @@ server.get("*",async (req, res,next) => {
       pathname: req.url,
     };
 
+    console.log("服务端渲染了",context)
     const route = await router.resolve(context);
     const data = { ...route };
 
@@ -63,10 +63,24 @@ server.get("*",async (req, res,next) => {
  
      data.scripts = Array.from(scripts);
     
-    const html =  renderToString(<Html {...data} />);;
-    // 将渲染后的html字符串发送给客户端
-    res.status(200);
-    res.send(`<!doctype html>${html}`);
+    // const html =  renderToString(<Html {...data} />);
+    // // 将渲染后的html字符串发送给客户端
+    // res.status(200);
+    // res.send(`<!doctype html>${html}`);
+    const stream = renderToPipeableStream(
+      <Html {...data} />,
+      {
+        onShellReady() {
+          res.statusCode =  200;
+          res.setHeader("Content-type", "text/html");
+          stream.pipe(res);  // 通过 React 的 stream 流式把数据返回
+        },
+        onError(x) {
+          console.error(x);
+        },
+      }
+    );
+
   }catch(err){
     // console.err(err)
     next(err);
