@@ -1,21 +1,52 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import {hydrateRoot,createRoot}from 'react-dom/client';
 import App from "./app";
-import action from "./pages/home";
 import router from "./routes/routeRender";
+import deepForceUpdate from 'react-deep-force-update';
 
+import { createBrowserHistory } from "history";
 
-const insertCss = (...styles) => {
-  const removeCss = styles.map(style => style._insertCss())
-  return () => removeCss.forEach(dispose => dispose())
+let history = createBrowserHistory();
+
+const context = {};
+let currentLocation = history.location;
+let appInstance;
+ 
+async function onLocationChange(location, action){
+
+  const isInitialRender = action;
+
+  context.pathname = location.pathname;
+
+  const route = await router.resolve(context);
+  const insertCss = (...styles) => {
+    const removeCss = styles.map(style => style._insertCss())
+    return () => removeCss.forEach(dispose => dispose())
+  }
+  const element = (<App insertCss={insertCss}>
+    {route.component}
+  </App>);
+  const container = document.getElementById('app');
+  const appInstance = isInitialRender ? hydrateRoot(element,container) : createRoot(container).render(element);
+
 }
 
-router.resolve({ pathname: '/news' }).then(action => {
-  ReactDOM.hydrate(
-  (
-    <App insertCss={insertCss}>
-      {action.component}
-    </App>
-  ), 
-    document.getElementById('root'))
-})
+
+
+
+
+history.listen(onLocationChange);
+onLocationChange(currentLocation);
+
+
+
+if (module.hot) {
+  module.hot.accept('./routes/routeRender', () => {
+      if (appInstance && appInstance.updater.isMounted(appInstance)) {
+          // Force-update the whole tree, including components that refuse to update
+          deepForceUpdate(appInstance);
+      }
+      console.log('client----router更新')
+      onLocationChange(currentLocation);
+  });
+}

@@ -1,6 +1,6 @@
 
-import HomePage from "../pages/home/index";
-import NewsPage from "../pages/news";
+// import HomePage from "../pages/home/index";
+// import NewsPage from "../pages/news";
 
 
 const routes = {
@@ -13,7 +13,7 @@ const routes = {
         },
         {
             path:"/news",
-            load:()=> import(/* webpackChunkName: 'NewsPage' */ "../pages/news/index"),
+            load:()=> import(/* webpackChunkName: 'newsPage' */ "../pages/news/index"),
         },
         {
             path:"(.*)",

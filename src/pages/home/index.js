@@ -4,7 +4,7 @@ import Home from './home';
 async function action ({cookie , fetch}) {
     return {
         title: '京日找房',
-        chunks: ['home'],
+        chunks: ['homePage'],
         keywords: '京日找房',
         description: '京日找房',
         component: (

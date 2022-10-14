@@ -1,17 +1,17 @@
 import React from "react";
 import s from "./index.less";
-import useStyles from 'isomorphic-style-loader/useStyles'
-import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
+import { useNavigate } from "react-router-dom";
 
  function News(props, context){
-    // useStyles(s);
-    // console.log(s,s.news_panel)
+    useStyles(s);
     return (
         <div className="news_panel">
-            <div className="title">新闻</div>
-            <div className="content">内容</div>
+            <div className="title">新sf闻</div>
+            <div onClick={() => navigate("/")}>主页</div>
+            <div className="content">assfsss</div>
         </div>
     )
 }
 
-export default withStyles(s)(News);
+export default News;

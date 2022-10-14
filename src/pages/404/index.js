@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
+import NotFoundPage from './404';
 
-export default function NotFoundPage(){
-    return (
-        <div>404</div>
-    )
+async function action () {
+    return {
+        title: '京日找房',
+        chunks: ['notfound'],
+        component: (
+            <NotFoundPage />
+        )
+    };
 }
+export default action;
