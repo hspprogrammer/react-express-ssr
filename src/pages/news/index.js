@@ -2,9 +2,8 @@ import React from 'react';
 import News from './news';
 
 async function action ({cookie , fetch}) {
-    console.log("新闻页面")
     return {
-        title: '京日找房',
+        title: '新闻',
         chunks: ['newsPage'],
         keywords: '京日找房',
         description: '京日找房',

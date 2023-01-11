@@ -17,7 +17,7 @@ async function onLocationChange({location, action}){
 
   context.pathname = location.pathname;
 
-  console.log("客户端渲染",context,location)
+  console.log("客户端渲染",isInitialRender != 'PUSH')
   const route = await router.resolve(context);
   const insertCss = (...styles) => {
     const removeCss = styles.map(style => style._insertCss())
@@ -27,8 +27,12 @@ async function onLocationChange({location, action}){
     {route.component}
   </App>);
   const container = document.getElementById('app');
-  appInstance = isInitialRender ? hydrateRoot(container,element) : createRoot(container).render(element);
-
+  
+  if(isInitialRender!='PUSH'){
+    appInstance =  hydrateRoot(container,element)
+  }else{
+    appInstance.render(element);
+  }
 }
 
 

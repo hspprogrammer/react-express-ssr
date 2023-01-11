@@ -6,7 +6,7 @@ import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unr
 import path from "path";
 import {renderToString,renderToStaticMarkup,renderToPipeableStream} from "react-dom/server";
 import Html from "./components/html";
-import { NotFoundPage } from './pages/404/404';
+import NotFoundPage from './pages/404/404';
 
 const isDebug = !process.argv.includes('--release');
 

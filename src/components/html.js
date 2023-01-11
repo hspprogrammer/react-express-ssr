@@ -21,6 +21,7 @@ export default function Html({
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
+                <link rel="icon" href="../public/favicon.ico"></link>
                 {/* <script src="./js/webreport.js"></script>
                 <script
                     dangerouslySetInnerHTML={{
@@ -30,14 +31,14 @@ export default function Html({
                         });`,
                     }}
                 /> */}
-                {scripts.map(script => (
+                {/* {scripts.map(script => (
                     <link
                         key={script}
                         rel="preload"
                         href={script}
                         as="script"
                     />
-                ))}
+                ))} */}
                 {styles.map(style => (
                     <style
                         key={style.id}

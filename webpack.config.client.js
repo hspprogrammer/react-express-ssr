@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const isDebug = !process.argv.includes("--release");
 const DIST_DTR = path.resolve(__dirname,'./dist');
-import webpack from 'webpack';
+const webpack =  require('webpack');
 
 const ClientWebpackConfig = merge(baseWebpackConfig,{
     entry: {
