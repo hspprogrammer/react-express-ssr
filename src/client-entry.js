@@ -19,6 +19,11 @@ async function onLocationChange({location, action}){
 
   console.log("客户端渲染",isInitialRender != 'PUSH')
   const route = await router.resolve(context);
+
+  route.title && (document.title = route.title);
+  route.keywords && (document.querySelector('meta[name="keywords"]').setAttribute('content',route.keywords));
+  route.description && (document.querySelector('meta[name="description"]').setAttribute('content',route.description));
+  
   const insertCss = (...styles) => {
     const removeCss = styles.map(style => style._insertCss())
     return () => removeCss.forEach(dispose => dispose())

@@ -3,7 +3,7 @@ import React from "react";
 export default function Html({
     title='react-express-srr',
     description = '',
-    keyword='ssr',
+    keywords='ssr',
     styles=[],
     scripts=[],
     app ={},
@@ -15,7 +15,7 @@ export default function Html({
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <title>{title}</title>
-                <meta name="keyword" content={keyword} />
+                <meta name="keywords" content={keywords} />
                 <meta name="description" content={description} />
                 <meta
                     name="viewport"
